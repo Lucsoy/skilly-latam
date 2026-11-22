@@ -1,0 +1,3 @@
+# Los documentos de respaldo son privados: nunca se sirven directamente.
+# Se descargan solo a través de la API, que valida la sesión y los permisos.
+Require all denied

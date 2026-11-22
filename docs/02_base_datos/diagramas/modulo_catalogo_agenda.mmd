@@ -1,0 +1,93 @@
+erDiagram
+  categorias {
+    varchar_50 id PK
+    varchar_150 nombre
+    text descripcion
+  }
+  subcategorias {
+    varchar_50 id PK
+    varchar_50 categoria_id FK
+    varchar_150 nombre
+  }
+  servicios {
+    varchar_50 id PK
+    varchar_50 profesional_id FK
+    varchar_50 categoria_id FK
+    varchar_50 subcategoria_id FK
+    varchar_255 titulo
+    text descripcion
+    varchar_100 duracion_estimada
+    int duracion_sesion_minutos
+    int precio
+    tinyint publicado
+    datetime actualizado_en
+  }
+  servicio_entregables {
+    int id PK
+    varchar_50 servicio_id FK
+    varchar_255 entregable
+  }
+  servicio_modalidades {
+    int id PK
+    varchar_50 servicio_id FK
+    enum modalidad
+  }
+  servicio_etiquetas {
+    int id PK
+    varchar_50 servicio_id FK
+    varchar_100 etiqueta
+  }
+  solicitudes_revision_servicio {
+    varchar_50 id PK
+    varchar_50 servicio_id FK
+    varchar_50 profesional_id FK
+    enum estado
+    text mensaje
+    datetime solicitada_en
+    datetime resuelta_en
+    text comentario_admin
+    varchar_150 revisado_por
+  }
+  bloques_disponibles {
+    varchar_50 id PK
+    varchar_50 profesional_id FK
+    datetime inicio
+    datetime fin
+  }
+  horarios_semanales {
+    varchar_50 profesional_id PK,FK
+    tinyint dia PK
+    tinyint activo
+    time desde
+    time hasta
+  }
+  bloqueos_disponibilidad {
+    varchar_50 id PK
+    varchar_50 profesional_id FK
+    date fecha
+    time desde
+    time hasta
+    varchar_255 motivo
+  }
+  retenciones {
+    varchar_50 id PK
+    varchar_50 bloque_id FK
+    varchar_50 servicio_id FK
+    varchar_50 organizacion_id FK
+    datetime expira_en
+  }
+  favoritos {
+    int id PK
+    varchar_50 usuario_id FK
+    varchar_50 servicio_id FK
+  }
+  servicios ||--o{ favoritos : "servicio_id (CASCADE)"
+  bloques_disponibles ||--o{ retenciones : "bloque_id (CASCADE)"
+  servicios ||--o{ retenciones : "servicio_id (CASCADE)"
+  servicios ||--o{ servicio_entregables : "servicio_id (CASCADE)"
+  servicios ||--o{ servicio_etiquetas : "servicio_id (CASCADE)"
+  servicios ||--o{ servicio_modalidades : "servicio_id (CASCADE)"
+  categorias ||--o{ servicios : "categoria_id (RESTRICT)"
+  subcategorias ||--o{ servicios : "subcategoria_id (RESTRICT)"
+  servicios ||--o{ solicitudes_revision_servicio : "servicio_id (CASCADE)"
+  categorias ||--o{ subcategorias : "categoria_id (RESTRICT)"

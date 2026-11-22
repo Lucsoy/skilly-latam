@@ -1,0 +1,111 @@
+{
+  "fecha": "2026-11-17T20:29:48.642Z",
+  "api": "http://127.0.0.1:8080/api",
+  "parametros": {
+    "SEC": 30,
+    "CONC": 32,
+    "TOTAL": 1000
+  },
+  "resultados": [
+    {
+      "endpoint": "Catálogo público (sin filtros)",
+      "ruta": "/servicios/",
+      "consultasSQLPorPeticion": null,
+      "bytesRespuesta": 269565,
+      "secuencial": {
+        "peticiones": 30,
+        "p50ms": 17.7,
+        "p95ms": 27,
+        "maxms": 27.3,
+        "errores": 0
+      },
+      "concurrente": {
+        "clientes": 32,
+        "peticiones": 1000,
+        "peticionesPorSegundo": 147.6,
+        "p95ms": 300.3,
+        "tasaError": 0
+      }
+    },
+    {
+      "endpoint": "Catálogo filtrado (categoría + modalidad + texto)",
+      "ruta": "/servicios/?categoria=reclutamiento&modalidad=remoto,hibrido&texto=sint",
+      "consultasSQLPorPeticion": null,
+      "bytesRespuesta": 22708,
+      "secuencial": {
+        "peticiones": 30,
+        "p50ms": 7.9,
+        "p95ms": 9.5,
+        "maxms": 9.8,
+        "errores": 0
+      },
+      "concurrente": {
+        "clientes": 32,
+        "peticiones": 1000,
+        "peticionesPorSegundo": 308.7,
+        "p95ms": 151.3,
+        "tasaError": 0
+      }
+    },
+    {
+      "endpoint": "Admin: todas las reservas",
+      "ruta": "/admin/?accion=reservas",
+      "consultasSQLPorPeticion": null,
+      "bytesRespuesta": 403541,
+      "secuencial": {
+        "peticiones": 30,
+        "p50ms": 15.5,
+        "p95ms": 21.1,
+        "maxms": 23.6,
+        "errores": 0
+      },
+      "concurrente": {
+        "clientes": 32,
+        "peticiones": 1000,
+        "peticionesPorSegundo": 143,
+        "p95ms": 313.6,
+        "tasaError": 0
+      }
+    },
+    {
+      "endpoint": "Admin: listado de reservas (endpoint reservas)",
+      "ruta": "/reservas/?accion=admin-listado",
+      "consultasSQLPorPeticion": null,
+      "bytesRespuesta": 360181,
+      "secuencial": {
+        "peticiones": 30,
+        "p50ms": 11.3,
+        "p95ms": 13.7,
+        "maxms": 14.4,
+        "errores": 0
+      },
+      "concurrente": {
+        "clientes": 32,
+        "peticiones": 1000,
+        "peticionesPorSegundo": 199.8,
+        "p95ms": 240.1,
+        "tasaError": 0
+      }
+    },
+    {
+      "endpoint": "Reputación de un profesional",
+      "ruta": "/evaluaciones/?accion=reputacion&profesional_id=perf-prof-1",
+      "consultasSQLPorPeticion": null,
+      "bytesRespuesta": 1010,
+      "secuencial": {
+        "peticiones": 30,
+        "p50ms": 1.7,
+        "p95ms": 1.9,
+        "maxms": 1.9,
+        "errores": 0
+      },
+      "concurrente": {
+        "clientes": 32,
+        "peticiones": 1000,
+        "peticionesPorSegundo": 1102.9,
+        "p95ms": 47.4,
+        "tasaError": 0
+      }
+    }
+  ]
+}

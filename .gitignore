@@ -1,0 +1,20 @@
+node_modules
+dist
+dist-ssr
+*.local
+.DS_Store
+.vite
+*.log
+
+# Backend: configuración local y archivos subidos
+backend/config/config.local.php
+backend/uploads/documentos/*
+!backend/uploads/documentos/.gitkeep
+
+# Las evidencias de ejecución sí se versionan (incluidos sus .log)
+!evidencias/**/*.log
+
+# Variables de entorno locales (la plantilla .env.example sí se sube)
+.env
+.env.local
+.env.*.local

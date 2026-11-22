@@ -1,0 +1,31 @@
+---
+title: Casos de uso — Administración, Fundadora y Sistema
+---
+flowchart LR
+  A["👤 Administrador"]
+  F["👤 Fundadora"]
+  S["👤 Sistema"]
+  subgraph SK["Skilly LATAM"]
+    direction TB
+    CU03(["CU-03 Iniciar y cerrar sesión"])
+    CU04(["CU-04 Cambiar contraseña"])
+    CU07(["CU-07 Validar profesional"])
+    CU09(["CU-09 Revisar servicio"])
+    CU14(["CU-14 Revisar solicitud"])
+    CU23(["CU-23 Moderar comentarios"])
+    CU24(["CU-24 Supervisar la plataforma"])
+    CU25(["CU-25 Configurar plataforma y administradores"])
+    CU13(["CU-13 Agendar y solicitar contratación"])
+    CU21(["CU-21 Evaluar contraparte"])
+  end
+  A --- CU03
+  A --- CU04
+  A --- CU07
+  A --- CU09
+  A --- CU14
+  A --- CU23
+  A --- CU24
+  F --- CU25
+  S --- CU13
+  S --- CU21
+  F -. "hereda los casos del Administrador" .-> A

@@ -1,0 +1,51 @@
+{
+  "fecha": "2026-11-17T20:29:14.919Z",
+  "clientes": 60,
+  "duracionMs": 234,
+  "horariosDistintos": {
+    "aprobadas": 30,
+    "de": 30,
+    "estados": [
+      201
+    ],
+    "codigosUnicos": true,
+    "correlativos": true
+  },
+  "mismoHorario": {
+    "ganadores": 1,
+    "estados": [
+      201,
+      404,
+      404,
+      404,
+      404,
+      404,
+      404,
+      404,
+      404,
+      404,
+      404,
+      404,
+      404,
+      404,
+      404,
+      404,
+      404,
+      404,
+      409,
+      409,
+      409,
+      409,
+      409,
+      409,
+      409,
+      409,
+      409,
+      409,
+      409,
+      409
+    ]
+  },
+  "errores500": 0
+}
+CONCURRENCIA DE ESCRITURA: APROBADA

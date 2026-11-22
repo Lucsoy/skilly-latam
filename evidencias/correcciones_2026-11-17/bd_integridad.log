@@ -1,0 +1,189 @@
+ERROR 4025 (23000) at line 11: CONSTRAINT `chk_evaluaciones_calidad` failed for `skilly_db`.`evaluaciones`
+ERROR 4025 (23000) at line 13: CONSTRAINT `chk_bloques_rango` failed for `skilly_db`.`bloques_disponibles`
+ERROR 4025 (23000) at line 15: CONSTRAINT `chk_reservas_montos` failed for `skilly_db`.`reservas`
+ERROR 1062 (23000) at line 17: Duplicate entry 'perf-res-1-1-organizacion' for key 'uq_evaluacion_reserva_autor'
+ERROR 1451 (23000) at line 20: Cannot delete or update a parent row: a foreign key constraint fails (`skilly_db`.`reservas`, CONSTRAINT `fk_reservas_servicio` FOREIGN KEY (`servicio_id`) REFERENCES `servicios` (`id`))
+--------------
+START TRANSACTION
+--------------
+
+Query OK, 0 rows affected (0.000 sec)
+
+--------------
+SELECT 'CP-BD-05 CHECK nivel de evaluación fuera de 1..4 → error 4025 esperado' AS caso
+--------------
+
++---------------------------------------------------------------------------+
+| caso                                                                      |
++---------------------------------------------------------------------------+
+| CP-BD-05 CHECK nivel de evaluación fuera de 1..4 → error 4025 esperado |
++---------------------------------------------------------------------------+
+1 row in set (0.000 sec)
+
+--------------
+UPDATE evaluaciones SET calidad = 5 WHERE id = 'perf-ev-1-1'
+--------------
+
+--------------
+SELECT 'CP-BD-06 CHECK bloque con fin anterior al inicio → error 4025 esperado' AS caso
+--------------
+
++--------------------------------------------------------------------------+
+| caso                                                                     |
++--------------------------------------------------------------------------+
+| CP-BD-06 CHECK bloque con fin anterior al inicio → error 4025 esperado |
++--------------------------------------------------------------------------+
+1 row in set (0.000 sec)
+
+--------------
+INSERT INTO bloques_disponibles (id, profesional_id, inicio, fin) VALUES ('x1', 'perf-prof-1', '2030-01-01 10:00:00', '2030-01-01 09:00:00')
+--------------
+
+--------------
+SELECT 'CP-BD-07 CHECK total distinto de precio + comisión → error 4025 esperado' AS caso
+--------------
+
++-----------------------------------------------------------------------------+
+| caso                                                                        |
++-----------------------------------------------------------------------------+
+| CP-BD-07 CHECK total distinto de precio + comisión → error 4025 esperado |
++-----------------------------------------------------------------------------+
+1 row in set (0.000 sec)
+
+--------------
+UPDATE reservas SET total = total + 1 WHERE id = 'perf-res-1-1'
+--------------
+
+--------------
+SELECT 'CP-BD-08 UNIQUE una evaluación por parte y reserva → error 1062 esperado' AS caso
+--------------
+
++-----------------------------------------------------------------------------+
+| caso                                                                        |
++-----------------------------------------------------------------------------+
+| CP-BD-08 UNIQUE una evaluación por parte y reserva → error 1062 esperado |
++-----------------------------------------------------------------------------+
+1 row in set (0.000 sec)
+
+--------------
+INSERT INTO evaluaciones (id, reserva_id, profesional_id, organizacion_id, autor, calidad, plazos, comunicacion)
+  SELECT 'dup', reserva_id, profesional_id, organizacion_id, autor, 3, 3, 3 FROM evaluaciones WHERE id = 'perf-ev-1-1'
+--------------
+
+--------------
+SELECT 'CP-BD-09 FK RESTRICT: borrar servicio con contrataciones → error 1451 esperado' AS caso
+--------------
+
++----------------------------------------------------------------------------------+
+| caso                                                                             |
++----------------------------------------------------------------------------------+
+| CP-BD-09 FK RESTRICT: borrar servicio con contrataciones → error 1451 esperado |
++----------------------------------------------------------------------------------+
+1 row in set (0.000 sec)
+
+--------------
+DELETE FROM servicios WHERE id = 'perf-srv-1-2'
+--------------
+
+--------------
+SELECT 'CP-BD-10 FK RESTRICT: borrar profesional con contrataciones → error 1451 esperado' AS caso
+--------------
+
++-------------------------------------------------------------------------------------+
+| caso                                                                                |
++-------------------------------------------------------------------------------------+
+| CP-BD-10 FK RESTRICT: borrar profesional con contrataciones → error 1451 esperado |
++------------------------------------------------------------------------ERROR 1451 (23000) at line 22: Cannot delete or update a parent row: a foreign key constraint fails (`skilly_db`.`reservas`, CONSTRAINT `fk_reservas_profesional` FOREIGN KEY (`profesional_id`) REFERENCES `profesionales` (`id`))
+ERROR 1452 (23000) at line 24: Cannot add or update a child row: a foreign key constraint fails (`skilly_db`.`favoritos`, CONSTRAINT `fk_favoritos_organizacion` FOREIGN KEY (`usuario_id`) REFERENCES `organizaciones` (`id`) ON DELETE CASCADE)
+ERROR 1062 (23000) at line 26: Duplicate entry '760000022' for key 'uq_organizaciones_rut_normalizado'
+ERROR 1451 (23000) at line 30: Cannot delete or update a parent row: a foreign key constraint fails (`skilly_db`.`evaluaciones`, CONSTRAINT `fk_evaluaciones_reserva` FOREIGN KEY (`reserva_id`) REFERENCES `reservas` (`id`))
+ERROR 1062 (23000) at line 32: Duplicate entry '760000022' for key 'uq_organizaciones_rut_normalizado'
+-------------+
+1 row in set (0.001 sec)
+
+--------------
+DELETE FROM profesionales WHERE id = 'perf-prof-1'
+--------------
+
+--------------
+SELECT 'CP-BD-11 FK favoritos → organización inexistente → error 1452 esperado' AS caso
+--------------
+
++-----------------------------------------------------------------------------+
+| caso                                                                        |
++-----------------------------------------------------------------------------+
+| CP-BD-11 FK favoritos → organización inexistente → error 1452 esperado |
++-----------------------------------------------------------------------------+
+1 row in set (0.001 sec)
+
+--------------
+INSERT INTO favoritos (usuario_id, servicio_id) VALUES ('org-que-no-existe', 'perf-srv-1-1')
+--------------
+
+--------------
+SELECT 'CP-BD-12 UNIQUE RUT normalizado: mismo RUT con puntos → error 1062 esperado' AS caso
+--------------
+
++-------------------------------------------------------------------------------+
+| caso                                                                          |
++-------------------------------------------------------------------------------+
+| CP-BD-12 UNIQUE RUT normalizado: mismo RUT con puntos → error 1062 esperado |
++-------------------------------------------------------------------------------+
+1 row in set (0.000 sec)
+
+--------------
+INSERT INTO organizaciones (id, razon_social, rut, giro, tamano, nombre_contacto, email_contacto)
+  SELECT 'dup-rut', 'Duplicada', CONCAT(SUBSTRING(rut, 1, 2), '.', SUBSTRING(rut, 3, 3), '.', SUBSTRING(rut, 6)), 'x', '1-10', 'x', 'x@x.cl'
+  FROM organizaciones WHERE id = 'perf-org-2'
+--------------
+
+--------------
+SELECT 'CP-BD-13 FK RESTRICT: borrar una contratación con historial → error 1451 esperado' AS caso
+--------------
+
++--------------------------------------------------------------------------------------+
+| caso                                                                                 |
++--------------------------------------------------------------------------------------+
+| CP-BD-13 FK RESTRICT: borrar una contratación con historial → error 1451 esperado |
++--------------------------------------------------------------------------------------+
+1 row in set (0.000 sec)
+
+--------------
+DELETE FROM reservas WHERE id = 'perf-res-1-1'
+--------------
+
+--------------
+SELECT 'CP-BD-14 UNIQUE RUT normalizado: mismo RUT con espacios → error 1062 esperado' AS caso
+--------------
+
++---------------------------------------------------------------------------------+
+| caso                                                                            |
++---------------------------------------------------------------------------------+
+| CP-BD-14 UNIQUE RUT normalizado: mismo RUT con espacios → error 1062 esperado |
++---------------------------------------------------------------------------------+
+1 row in set (0.001 sec)
+
+--------------
+INSERT INTO organizaciones (id, razon_social, rut, giro, tamano, nombre_contacto, email_contacto)
+  SELECT 'dup-rut-esp', 'Duplicada', CONCAT(SUBSTRING(rut, 1, 2), ' ', SUBSTRING(rut, 3)), 'x', '1-10', 'x', 'y@x.cl'
+  FROM organizaciones WHERE id = 'perf-org-2'
+--------------
+
+--------------
+ROLLBACK
+--------------
+
+Query OK, 0 rows affected (0.000 sec)
+
+--------------
+SELECT 'Fin: transacción revertida, la base queda igual' AS resultado
+--------------
+
++--------------------------------------------------+
+| resultado                                        |
++--------------------------------------------------+
+| Fin: transacción revertida, la base queda igual |
++--------------------------------------------------+
+1 row in set (0.000 sec)
+
+Bye

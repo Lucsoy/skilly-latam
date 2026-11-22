@@ -1,0 +1,168 @@
+erDiagram
+  categorias {
+    varchar_50 id PK
+  }
+  subcategorias {
+    varchar_50 id PK
+    varchar_50 categoria_id FK
+  }
+  organizaciones {
+    varchar_50 id PK
+    varchar_20 rut UK
+    varchar_12 rut_normalizado UK
+  }
+  profesionales {
+    varchar_50 id PK
+  }
+  profesional_formacion {
+    int id PK
+    varchar_50 profesional_id FK
+  }
+  profesional_experiencia {
+    int id PK
+    varchar_50 profesional_id FK
+  }
+  profesional_habilidades {
+    int id PK
+    varchar_50 profesional_id FK
+  }
+  profesional_insignias {
+    int id PK
+    varchar_50 profesional_id FK
+  }
+  perfiles_profesionales {
+    varchar_50 profesional_id PK,FK
+  }
+  documentos_respaldo {
+    varchar_50 id PK
+    varchar_50 profesional_id FK
+  }
+  cuentas {
+    varchar_50 id PK
+    varchar_255 email UK
+    varchar_50 organizacion_id FK
+    varchar_50 profesional_id FK
+  }
+  sesiones_autenticacion {
+    char_64 token_hash PK
+    varchar_50 cuenta_id FK
+  }
+  intentos_login {
+    int id PK
+  }
+  servicios {
+    varchar_50 id PK
+    varchar_50 profesional_id FK
+    varchar_50 categoria_id FK
+    varchar_50 subcategoria_id FK
+  }
+  servicio_entregables {
+    int id PK
+    varchar_50 servicio_id FK
+  }
+  servicio_modalidades {
+    int id PK
+    varchar_50 servicio_id FK
+  }
+  servicio_etiquetas {
+    int id PK
+    varchar_50 servicio_id FK
+  }
+  solicitudes_revision_servicio {
+    varchar_50 id PK
+    varchar_50 servicio_id FK
+    varchar_50 profesional_id FK
+  }
+  bloques_disponibles {
+    varchar_50 id PK
+    varchar_50 profesional_id FK
+  }
+  horarios_semanales {
+    varchar_50 profesional_id PK,FK
+    tinyint dia PK
+  }
+  bloqueos_disponibilidad {
+    varchar_50 id PK
+    varchar_50 profesional_id FK
+  }
+  retenciones {
+    varchar_50 id PK
+    varchar_50 bloque_id FK
+    varchar_50 servicio_id FK
+    varchar_50 organizacion_id FK
+  }
+  reservas {
+    varchar_50 id PK
+    varchar_20 codigo UK
+    varchar_50 organizacion_id FK
+    varchar_50 profesional_id FK
+    varchar_50 servicio_id FK
+    varchar_50 administrador_asignado_id FK
+  }
+  contadores_reserva {
+    smallint anio PK
+  }
+  historial_reservas {
+    varchar_50 id PK
+    bigint secuencia UK
+    varchar_50 reserva_id FK
+  }
+  mensajes_chat {
+    varchar_80 id PK
+    varchar_50 reserva_id FK
+    varchar_50 cuenta_id FK
+  }
+  evaluaciones {
+    varchar_50 id PK
+    varchar_50 reserva_id FK
+    varchar_50 profesional_id FK
+    varchar_50 organizacion_id FK
+  }
+  favoritos {
+    int id PK
+    varchar_50 usuario_id FK
+    varchar_50 servicio_id FK
+  }
+  configuracion_plataforma {
+    int id PK
+  }
+  tramos_cancelacion {
+    int id PK
+    int desde_horas UK
+  }
+  profesionales ||--o{ bloqueos_disponibilidad : "profesional_id (CASCADE)"
+  profesionales ||--o{ bloques_disponibles : "profesional_id (CASCADE)"
+  organizaciones |o--o{ cuentas : "organizacion_id (SET NULL)"
+  profesionales |o--o{ cuentas : "profesional_id (SET NULL)"
+  profesionales ||--o{ documentos_respaldo : "profesional_id (CASCADE)"
+  organizaciones ||--o{ evaluaciones : "organizacion_id (CASCADE)"
+  profesionales ||--o{ evaluaciones : "profesional_id (CASCADE)"
+  reservas ||--o{ evaluaciones : "reserva_id (RESTRICT)"
+  servicios ||--o{ favoritos : "servicio_id (CASCADE)"
+  organizaciones ||--o{ favoritos : "usuario_id (CASCADE)"
+  reservas ||--o{ historial_reservas : "reserva_id (RESTRICT)"
+  profesionales ||--o{ horarios_semanales : "profesional_id (CASCADE)"
+  cuentas ||--o{ mensajes_chat : "cuenta_id (CASCADE)"
+  reservas ||--o{ mensajes_chat : "reserva_id (RESTRICT)"
+  profesionales ||--o| perfiles_profesionales : "profesional_id (CASCADE)"
+  profesionales ||--o{ profesional_experiencia : "profesional_id (CASCADE)"
+  profesionales ||--o{ profesional_formacion : "profesional_id (CASCADE)"
+  profesionales ||--o{ profesional_habilidades : "profesional_id (CASCADE)"
+  profesionales ||--o{ profesional_insignias : "profesional_id (CASCADE)"
+  cuentas |o--o{ reservas : "administrador_asignado_id (SET NULL)"
+  organizaciones ||--o{ reservas : "organizacion_id (RESTRICT)"
+  profesionales ||--o{ reservas : "profesional_id (RESTRICT)"
+  servicios ||--o{ reservas : "servicio_id (RESTRICT)"
+  bloques_disponibles ||--o{ retenciones : "bloque_id (CASCADE)"
+  organizaciones ||--o{ retenciones : "organizacion_id (CASCADE)"
+  servicios ||--o{ retenciones : "servicio_id (CASCADE)"
+  servicios ||--o{ servicio_entregables : "servicio_id (CASCADE)"
+  servicios ||--o{ servicio_etiquetas : "servicio_id (CASCADE)"
+  servicios ||--o{ servicio_modalidades : "servicio_id (CASCADE)"
+  categorias ||--o{ servicios : "categoria_id (RESTRICT)"
+  profesionales ||--o{ servicios : "profesional_id (CASCADE)"
+  subcategorias ||--o{ servicios : "subcategoria_id (RESTRICT)"
+  cuentas ||--o{ sesiones_autenticacion : "cuenta_id (CASCADE)"
+  profesionales ||--o{ solicitudes_revision_servicio : "profesional_id (CASCADE)"
+  servicios ||--o{ solicitudes_revision_servicio : "servicio_id (CASCADE)"
+  categorias ||--o{ subcategorias : "categoria_id (RESTRICT)"

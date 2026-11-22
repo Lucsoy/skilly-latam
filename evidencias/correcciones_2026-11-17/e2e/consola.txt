@@ -1,0 +1,32 @@
+[ aprobado] E2E-21 La fundadora debe cambiar la contraseña inicial publicada antes de usar el panel (T-07)
+[ aprobado] E2E-01 Registro de organización desde la interfaz (RUT válido y consentimiento)
+[ aprobado] E2E-02 Validación de formulario: RUT inválido muestra el error en pantalla
+[ aprobado] E2E-03 Catálogo: búsqueda por texto y filtro de modalidad (INC-02)
+[ aprobado] E2E-04 Ficha del servicio y agendamiento: día, hora y retención del bloque
+[ aprobado] E2E-05 Condiciones: aceptación explícita y envío de la solicitud
+[ aprobado] E2E-06 Administración asigna responsable y aprueba la solicitud
+[ aprobado] E2E-07 El profesional acepta el trabajo (diálogo de confirmación)
+[ aprobado] E2E-08 Pago SIMULADO por la organización con datos de prueba
+[ aprobado] E2E-09 La organización propone una nueva fecha (reagendamiento, INC-06)
+[ aprobado] E2E-10 El profesional acepta la nueva fecha
+[ aprobado] E2E-11 Chat: un mensaje con HTML/JS se muestra como texto y no se ejecuta (XSS)
+[ aprobado] E2E-12 El profesional inicia el trabajo y lo marca como entregado (INC-01)
+[ aprobado] E2E-13 La organización confirma conformidad y evalúa al profesional
+[ aprobado] E2E-14 El profesional evalúa a la organización (antes sin interfaz, INC-05)
+[ aprobado] E2E-15 Moderación del comentario por administración
+[ aprobado] E2E-16 Cancelación antes de pagar: el diálogo indica que no hay cobro y Escape lo cierra (A-12)
+[ aprobado] E2E-18 El profesional ve sus ingresos con el desglose de comisión
+[ aprobado] E2E-19 Administración: resumen y listado de reservas con el código de la contratación
+[ aprobado] E2E-20 La organización actualiza el perfil de su organización
+[ aprobado] E2E-17 Accesibilidad: el formulario de ingreso se recorre con Tab en orden lógico
+[ aprobado] RESP-ingreso-movil Diseño responsivo: ingreso en movil (390×844) sin desborde horizontal
+[ aprobado] RESP-catalogo-movil Diseño responsivo: catalogo en movil (390×844) sin desborde horizontal
+[ aprobado] RESP-servicio-movil Diseño responsivo: servicio en movil (390×844) sin desborde horizontal
+[ aprobado] RESP-ingreso-tablet Diseño responsivo: ingreso en tablet (768×1024) sin desborde horizontal
+[ aprobado] RESP-catalogo-tablet Diseño responsivo: catalogo en tablet (768×1024) sin desborde horizontal
+[ aprobado] RESP-servicio-tablet Diseño responsivo: servicio en tablet (768×1024) sin desborde horizontal
+[ aprobado] RESP-ingreso-escritorio Diseño responsivo: ingreso en escritorio (1440×900) sin desborde horizontal
+[ aprobado] RESP-catalogo-escritorio Diseño responsivo: catalogo en escritorio (1440×900) sin desborde horizontal
+[ aprobado] RESP-servicio-escritorio Diseño responsivo: servicio en escritorio (1440×900) sin desborde horizontal
+
+Aprobados 30 · Fallidos 0 · Bloqueados 0 · Errores JS 0

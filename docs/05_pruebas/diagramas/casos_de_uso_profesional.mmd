@@ -1,0 +1,35 @@
+---
+title: Casos de uso — Profesional
+---
+flowchart LR
+  P["👤 Profesional"]
+  subgraph SK["Skilly LATAM"]
+    direction TB
+    CU02(["CU-02 Registrar profesional"])
+    CU03(["CU-03 Iniciar y cerrar sesión"])
+    CU04(["CU-04 Cambiar contraseña"])
+    CU06(["CU-06 Completar perfil y documentos"])
+    CU08(["CU-08 Gestionar servicios"])
+    CU09(["CU-09 Revisar servicio"])
+    CU10(["CU-10 Configurar disponibilidad"])
+    CU15(["CU-15 Responder solicitud de trabajo"])
+    CU17(["CU-17 Coordinar por chat"])
+    CU18(["CU-18 Reagendar"])
+    CU20(["CU-20 Ejecutar, entregar y dar conformidad"])
+    CU21(["CU-21 Evaluar contraparte"])
+    CU26(["CU-26 Consultar ingresos"])
+  end
+  P --- CU02
+  P --- CU03
+  P --- CU04
+  P --- CU06
+  P --- CU08
+  P --- CU09
+  P --- CU10
+  P --- CU15
+  P --- CU17
+  P --- CU18
+  P --- CU20
+  P --- CU21
+  P --- CU26
+  CU09 -. "extiende" .-> CU08

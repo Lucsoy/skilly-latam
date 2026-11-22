@@ -1,0 +1,5 @@
+Sintaxis PHP 20/20
+OK Una sesión de 90 minutos devuelve únicamente la hora permitida
+OK La franja con otra reserva sigue ocupada
+OK Un cambio de jornada se respeta al liberar
+OK La eliminación queda acotada al titular y grupo seleccionado

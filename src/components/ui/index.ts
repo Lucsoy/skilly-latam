@@ -1,0 +1,12 @@
+export { Boton, BotonEnlace, clasesBoton } from './Boton';
+export { Cargando } from './Cargando';
+export { CampoTexto, CampoSelect, CampoTextarea, CampoCheckbox } from './Campo';
+export { Tarjeta } from './Tarjeta';
+export { Insignia } from './Insignia';
+export { Esqueleto, EsqueletoTexto } from './Esqueleto';
+export { EstadoVacio, EstadoError } from './Estados';
+export { Dialogo } from './Dialogo';
+export { Pestanas } from './Pestanas';
+export { Alerta } from './Alerta';
+export { Avatar } from './Avatar';
+export { Revelar } from './Revelar';

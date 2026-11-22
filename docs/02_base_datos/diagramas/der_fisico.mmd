@@ -1,0 +1,304 @@
+erDiagram
+  categorias {
+    varchar_50 id PK
+    varchar_150 nombre
+    text descripcion
+  }
+  subcategorias {
+    varchar_50 id PK
+    varchar_50 categoria_id FK
+    varchar_150 nombre
+  }
+  organizaciones {
+    varchar_50 id PK
+    varchar_255 razon_social
+    varchar_20 rut UK
+    varchar_12 rut_normalizado UK
+    varchar_255 giro
+    enum tamano
+    varchar_255 nombre_contacto
+    varchar_255 email_contacto
+    varchar_50 telefono
+    varchar_255 sitio_web
+    text descripcion
+    varchar_255 direccion
+    tinyint consentimiento_aceptado
+    datetime consentimiento_fecha
+    varchar_20 consentimiento_version
+    datetime creada_en
+  }
+  profesionales {
+    varchar_50 id PK
+    varchar_100 nombre
+    varchar_100 apellido
+    varchar_255 titulo
+    varchar_100 ciudad
+    text presentacion
+    varchar_255 linkedin
+    varchar_255 portafolio
+    tinyint validado_por_skilly
+    datetime fecha_ingreso
+  }
+  profesional_formacion {
+    int id PK
+    varchar_50 profesional_id FK
+    varchar_255 descripcion
+  }
+  profesional_experiencia {
+    int id PK
+    varchar_50 profesional_id FK
+    varchar_255 cargo
+    varchar_255 organizacion
+    varchar_100 periodo
+  }
+  profesional_habilidades {
+    int id PK
+    varchar_50 profesional_id FK
+    varchar_100 habilidad
+  }
+  profesional_insignias {
+    int id PK
+    varchar_50 profesional_id FK
+    enum insignia
+  }
+  perfiles_profesionales {
+    varchar_50 profesional_id PK,FK
+    varchar_255 email
+    varchar_50 area_principal
+    enum estado_validacion
+    datetime validado_en
+    text comentario_validacion
+    tinyint consentimiento_aceptado
+    datetime consentimiento_fecha
+    varchar_20 consentimiento_version
+  }
+  documentos_respaldo {
+    varchar_50 id PK
+    varchar_50 profesional_id FK
+    enum tipo
+    varchar_255 nombre_archivo
+    int tamano_bytes
+    datetime subido_en
+    enum estado
+    varchar_255 ruta_archivo
+    varchar_100 tipo_mime
+  }
+  cuentas {
+    varchar_50 id PK
+    varchar_255 email UK
+    varchar_255 contrasena
+    enum rol
+    varchar_255 nombre
+    varchar_50 organizacion_id FK
+    varchar_50 profesional_id FK
+  }
+  sesiones_autenticacion {
+    char_64 token_hash PK
+    varchar_50 cuenta_id FK
+    datetime creada_en
+    datetime expira_en
+  }
+  intentos_login {
+    int id PK
+    varchar_255 email
+    varchar_45 ip
+    datetime fecha
+  }
+  servicios {
+    varchar_50 id PK
+    varchar_50 profesional_id FK
+    varchar_50 categoria_id FK
+    varchar_50 subcategoria_id FK
+    varchar_255 titulo
+    text descripcion
+    varchar_100 duracion_estimada
+    int duracion_sesion_minutos
+    int precio
+    tinyint publicado
+    datetime actualizado_en
+  }
+  servicio_entregables {
+    int id PK
+    varchar_50 servicio_id FK
+    varchar_255 entregable
+  }
+  servicio_modalidades {
+    int id PK
+    varchar_50 servicio_id FK
+    enum modalidad
+  }
+  servicio_etiquetas {
+    int id PK
+    varchar_50 servicio_id FK
+    varchar_100 etiqueta
+  }
+  solicitudes_revision_servicio {
+    varchar_50 id PK
+    varchar_50 servicio_id FK
+    varchar_50 profesional_id FK
+    enum estado
+    text mensaje
+    datetime solicitada_en
+    datetime resuelta_en
+    text comentario_admin
+    varchar_150 revisado_por
+  }
+  bloques_disponibles {
+    varchar_50 id PK
+    varchar_50 profesional_id FK
+    datetime inicio
+    datetime fin
+  }
+  horarios_semanales {
+    varchar_50 profesional_id PK,FK
+    tinyint dia PK
+    tinyint activo
+    time desde
+    time hasta
+  }
+  bloqueos_disponibilidad {
+    varchar_50 id PK
+    varchar_50 profesional_id FK
+    date fecha
+    time desde
+    time hasta
+    varchar_255 motivo
+  }
+  retenciones {
+    varchar_50 id PK
+    varchar_50 bloque_id FK
+    varchar_50 servicio_id FK
+    varchar_50 organizacion_id FK
+    datetime expira_en
+  }
+  reservas {
+    varchar_50 id PK
+    varchar_20 codigo UK
+    varchar_50 organizacion_id FK
+    varchar_50 profesional_id FK
+    varchar_50 servicio_id FK
+    datetime inicio
+    datetime fin
+    enum modalidad
+    text mensaje
+    int precio
+    decimal_5_2 comision_porcentaje
+    int comision
+    int total
+    enum estado
+    enum estado_pago
+    tinyint conformidad_confirmada
+    datetime conformidad_fecha
+    datetime aceptacion_fecha
+    varchar_255 aceptacion_usuario
+    varchar_20 aceptacion_version
+    datetime reagendamiento_inicio
+    datetime reagendamiento_fin
+    datetime reagendamiento_solicitado
+    varchar_50 administrador_asignado_id FK
+    varchar_255 administrador_asignado_nombre
+    datetime administrador_decidio_en
+    datetime profesional_decidio_en
+    datetime pago_confirmado_en
+    datetime creada_en
+  }
+  contadores_reserva {
+    smallint anio PK
+    int ultimo
+  }
+  historial_reservas {
+    varchar_50 id PK
+    bigint secuencia UK
+    varchar_50 reserva_id FK
+    datetime fecha
+    enum actor_tipo
+    varchar_255 actor_nombre
+    varchar_20 estado_anterior
+    varchar_20 estado_nuevo
+    text motivo
+    text detalle
+  }
+  mensajes_chat {
+    varchar_80 id PK
+    varchar_50 reserva_id FK
+    varchar_50 cuenta_id FK
+    enum autor_rol
+    varchar_255 autor_nombre
+    text texto
+    datetime enviado_en
+  }
+  evaluaciones {
+    varchar_50 id PK
+    varchar_50 reserva_id FK
+    varchar_50 profesional_id FK
+    varchar_50 organizacion_id FK
+    enum autor
+    tinyint calidad
+    tinyint plazos
+    tinyint comunicacion
+    text comentario
+    datetime fecha
+    tinyint publicada
+    enum estado_comentario
+  }
+  favoritos {
+    int id PK
+    varchar_50 usuario_id FK
+    varchar_50 servicio_id FK
+  }
+  configuracion_plataforma {
+    int id PK
+    decimal_5_2 comision_porcentaje
+    decimal_5_2 comision_profesional_porcentaje
+    decimal_5_2 comision_organizacion_porcentaje
+    int retencion_bloque_minutos
+    int reputacion_minimo_evaluaciones
+    int reputacion_ventana_max
+    int reputacion_ventana_meses
+    int reputacion_dias_publicacion
+    int reputacion_max_caracteres
+    varchar_20 version_condiciones
+    varchar_20 version_politica_datos
+  }
+  tramos_cancelacion {
+    int id PK
+    int desde_horas UK
+    int retencion_porcentaje
+    varchar_100 etiqueta
+  }
+  profesionales ||--o{ bloqueos_disponibilidad : "profesional_id (CASCADE)"
+  profesionales ||--o{ bloques_disponibles : "profesional_id (CASCADE)"
+  organizaciones |o--o{ cuentas : "organizacion_id (SET NULL)"
+  profesionales |o--o{ cuentas : "profesional_id (SET NULL)"
+  profesionales ||--o{ documentos_respaldo : "profesional_id (CASCADE)"
+  organizaciones ||--o{ evaluaciones : "organizacion_id (CASCADE)"
+  profesionales ||--o{ evaluaciones : "profesional_id (CASCADE)"
+  reservas ||--o{ evaluaciones : "reserva_id (RESTRICT)"
+  servicios ||--o{ favoritos : "servicio_id (CASCADE)"
+  organizaciones ||--o{ favoritos : "usuario_id (CASCADE)"
+  reservas ||--o{ historial_reservas : "reserva_id (RESTRICT)"
+  profesionales ||--o{ horarios_semanales : "profesional_id (CASCADE)"
+  cuentas ||--o{ mensajes_chat : "cuenta_id (CASCADE)"
+  reservas ||--o{ mensajes_chat : "reserva_id (RESTRICT)"
+  profesionales ||--o| perfiles_profesionales : "profesional_id (CASCADE)"
+  profesionales ||--o{ profesional_experiencia : "profesional_id (CASCADE)"
+  profesionales ||--o{ profesional_formacion : "profesional_id (CASCADE)"
+  profesionales ||--o{ profesional_habilidades : "profesional_id (CASCADE)"
+  profesionales ||--o{ profesional_insignias : "profesional_id (CASCADE)"
+  cuentas |o--o{ reservas : "administrador_asignado_id (SET NULL)"
+  organizaciones ||--o{ reservas : "organizacion_id (RESTRICT)"
+  profesionales ||--o{ reservas : "profesional_id (RESTRICT)"
+  servicios ||--o{ reservas : "servicio_id (RESTRICT)"
+  bloques_disponibles ||--o{ retenciones : "bloque_id (CASCADE)"
+  organizaciones ||--o{ retenciones : "organizacion_id (CASCADE)"
+  servicios ||--o{ retenciones : "servicio_id (CASCADE)"
+  servicios ||--o{ servicio_entregables : "servicio_id (CASCADE)"
+  servicios ||--o{ servicio_etiquetas : "servicio_id (CASCADE)"
+  servicios ||--o{ servicio_modalidades : "servicio_id (CASCADE)"
+  categorias ||--o{ servicios : "categoria_id (RESTRICT)"
+  profesionales ||--o{ servicios : "profesional_id (CASCADE)"
+  subcategorias ||--o{ servicios : "subcategoria_id (RESTRICT)"
+  cuentas ||--o{ sesiones_autenticacion : "cuenta_id (CASCADE)"
+  profesionales ||--o{ solicitudes_revision_servicio : "profesional_id (CASCADE)"
+  servicios ||--o{ solicitudes_revision_servicio : "servicio_id (CASCADE)"
+  categorias ||--o{ subcategorias : "categoria_id (RESTRICT)"

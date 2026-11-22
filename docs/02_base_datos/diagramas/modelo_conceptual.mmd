@@ -1,0 +1,28 @@
+---
+title: Skilly LATAM — Modelo conceptual (entidades de negocio y relaciones)
+---
+erDiagram
+  CATEGORIA ||--|{ SUBCATEGORIA : "agrupa"
+  ORGANIZACION ||--|{ CUENTA : "accede mediante"
+  PROFESIONAL ||--o| CUENTA : "accede mediante"
+  PROFESIONAL ||--|| PERFIL_PRIVADO : "tiene"
+  PROFESIONAL ||--o{ DOCUMENTO_RESPALDO : "acredita con"
+  PROFESIONAL ||--o{ SERVICIO : "publica"
+  CATEGORIA ||--o{ SERVICIO : "clasifica"
+  SUBCATEGORIA ||--o{ SERVICIO : "especializa"
+  SERVICIO ||--o{ SOLICITUD_REVISION : "se revisa en"
+  PROFESIONAL ||--o{ HORARIO_SEMANAL : "define"
+  PROFESIONAL ||--o{ BLOQUEO : "registra"
+  PROFESIONAL ||--o{ BLOQUE_DISPONIBLE : "ofrece"
+  BLOQUE_DISPONIBLE ||--o| RETENCION : "se retiene en"
+  ORGANIZACION ||--o{ RETENCION : "retiene"
+  ORGANIZACION ||--o{ CONTRATACION : "solicita"
+  PROFESIONAL ||--o{ CONTRATACION : "ejecuta"
+  SERVICIO ||--o{ CONTRATACION : "se contrata en"
+  CUENTA_ADMINISTRATIVA |o--o{ CONTRATACION : "revisa"
+  CONTRATACION ||--|{ EVENTO_HISTORIAL : "registra"
+  CONTRATACION ||--o{ MENSAJE_CHAT : "coordina con"
+  CONTRATACION ||--o{ EVALUACION : "se evalúa (máx. 1 por parte)"
+  ORGANIZACION ||--o{ FAVORITO : "guarda"
+  SERVICIO ||--o{ FAVORITO : "es guardado en"
+  CONFIGURACION ||--|{ TRAMO_CANCELACION : "define política"

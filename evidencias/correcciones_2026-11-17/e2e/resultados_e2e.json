@@ -1,0 +1,282 @@
+{
+  "fecha": "2026-11-17T17:31:12",
+  "navegador": "Google Chrome headless (Playwright)",
+  "web": "http://127.0.0.1:5173",
+  "api": "http://127.0.0.1:8080/api",
+  "aprobados": 30,
+  "fallidos": 0,
+  "bloqueados": 0,
+  "erroresJavaScript": [],
+  "pasos": [
+    {
+      "id": "E2E-21",
+      "descripcion": "La fundadora debe cambiar la contraseña inicial publicada antes de usar el panel (T-07)",
+      "inicio": "2026-11-17T17:29:50",
+      "estado": "aprobado",
+      "detalle": "Redirige a Mi cuenta hasta cambiarla; después el panel queda disponible.",
+      "segundos": 3.1,
+      "captura": "E2E-21.png"
+    },
+    {
+      "id": "E2E-01",
+      "descripcion": "Registro de organización desde la interfaz (RUT válido y consentimiento)",
+      "inicio": "2026-11-17T17:29:54",
+      "estado": "aprobado",
+      "detalle": "Cuenta creada y sesión iniciada; redirige al catálogo.",
+      "segundos": 2.2,
+      "captura": "E2E-01.png"
+    },
+    {
+      "id": "E2E-02",
+      "descripcion": "Validación de formulario: RUT inválido muestra el error en pantalla",
+      "inicio": "2026-11-17T17:29:56",
+      "estado": "aprobado",
+      "detalle": "Mensaje de dígito verificador visible; no se envía al servidor.",
+      "segundos": 1.4,
+      "captura": "E2E-02.png"
+    },
+    {
+      "id": "E2E-03",
+      "descripcion": "Catálogo: búsqueda por texto y filtro de modalidad (INC-02)",
+      "inicio": "2026-11-17T17:29:59",
+      "estado": "aprobado",
+      "detalle": "Híbrido: 1 resultado; presencial: 0 resultados.",
+      "segundos": 4.1,
+      "captura": "E2E-03.png"
+    },
+    {
+      "id": "E2E-04",
+      "descripcion": "Ficha del servicio y agendamiento: día, hora y retención del bloque",
+      "inicio": "2026-11-17T17:30:03",
+      "estado": "aprobado",
+      "detalle": "Bloque retenido; cuenta regresiva visible.",
+      "segundos": 2.0,
+      "captura": "E2E-04.png"
+    },
+    {
+      "id": "E2E-05",
+      "descripcion": "Condiciones: aceptación explícita y envío de la solicitud",
+      "inicio": "2026-11-17T17:30:06",
+      "estado": "aprobado",
+      "detalle": "Reserva res-fb84ebb1fbcce7fd en estado SOLICITADA.",
+      "segundos": 0.9,
+      "captura": "E2E-05.png"
+    },
+    {
+      "id": "E2E-06",
+      "descripcion": "Administración asigna responsable y aprueba la solicitud",
+      "inicio": "2026-11-17T17:30:07",
+      "estado": "aprobado",
+      "detalle": "Estado APROBADA_ADMIN.",
+      "segundos": 4.0,
+      "captura": "E2E-06.png"
+    },
+    {
+      "id": "E2E-07",
+      "descripcion": "El profesional acepta el trabajo (diálogo de confirmación)",
+      "inicio": "2026-11-17T17:30:11",
+      "estado": "aprobado",
+      "detalle": "Estado PENDIENTE_PAGO.",
+      "segundos": 4.3,
+      "captura": "E2E-07.png"
+    },
+    {
+      "id": "E2E-08",
+      "descripcion": "Pago SIMULADO por la organización con datos de prueba",
+      "inicio": "2026-11-17T17:30:17",
+      "estado": "aprobado",
+      "detalle": "Estado CONFIRMADA, pago confirmado (simulado).",
+      "segundos": 1.5,
+      "captura": "E2E-08.png"
+    },
+    {
+      "id": "E2E-09",
+      "descripcion": "La organización propone una nueva fecha (reagendamiento, INC-06)",
+      "inicio": "2026-11-17T17:30:19",
+      "estado": "aprobado",
+      "detalle": "Estado REAGENDADA con propuesta visible.",
+      "segundos": 1.1,
+      "captura": "E2E-09.png"
+    },
+    {
+      "id": "E2E-10",
+      "descripcion": "El profesional acepta la nueva fecha",
+      "inicio": "2026-11-17T17:30:21",
+      "estado": "aprobado",
+      "detalle": "Vuelve a CONFIRMADA con el nuevo horario.",
+      "segundos": 1.8,
+      "captura": "E2E-10.png"
+    },
+    {
+      "id": "E2E-11",
+      "descripcion": "Chat: un mensaje con HTML/JS se muestra como texto y no se ejecuta (XSS)",
+      "inicio": "2026-11-17T17:30:23",
+      "estado": "aprobado",
+      "detalle": "El texto se muestra literal; no se creó <img> ni se ejecutó onerror.",
+      "segundos": 1.1,
+      "captura": "E2E-11.png"
+    },
+    {
+      "id": "E2E-12",
+      "descripcion": "El profesional inicia el trabajo y lo marca como entregado (INC-01)",
+      "inicio": "2026-11-17T17:30:25",
+      "estado": "aprobado",
+      "detalle": "CONFIRMADA → EN_CURSO → ENTREGADA desde la interfaz.",
+      "segundos": 2.2,
+      "captura": "E2E-12.png"
+    },
+    {
+      "id": "E2E-13",
+      "descripcion": "La organización confirma conformidad y evalúa al profesional",
+      "inicio": "2026-11-17T17:30:28",
+      "estado": "aprobado",
+      "detalle": "Reserva EVALUADA; comentario queda en moderación.",
+      "segundos": 3.5,
+      "captura": "E2E-13.png"
+    },
+    {
+      "id": "E2E-14",
+      "descripcion": "El profesional evalúa a la organización (antes sin interfaz, INC-05)",
+      "inicio": "2026-11-17T17:30:32",
+      "estado": "aprobado",
+      "detalle": "Ambas evaluaciones enviadas → publicadas.",
+      "segundos": 2.7,
+      "captura": "E2E-14.png"
+    },
+    {
+      "id": "E2E-15",
+      "descripcion": "Moderación del comentario por administración",
+      "inicio": "2026-11-17T17:30:35",
+      "estado": "aprobado",
+      "detalle": "El comentario aparece en la cola de moderación.",
+      "segundos": 1.2,
+      "captura": "E2E-15.png"
+    },
+    {
+      "id": "E2E-16",
+      "descripcion": "Cancelación antes de pagar: el diálogo indica que no hay cobro y Escape lo cierra (A-12)",
+      "inicio": "2026-11-17T17:30:37",
+      "estado": "aprobado",
+      "detalle": "Sin pago previo: sin cobro ni reembolso; reserva CANCELADA.",
+      "segundos": 2.1,
+      "captura": "E2E-16.png"
+    },
+    {
+      "id": "E2E-18",
+      "descripcion": "El profesional ve sus ingresos con el desglose de comisión",
+      "inicio": "2026-11-17T17:30:39",
+      "estado": "aprobado",
+      "detalle": "El servicio pagado (simulado) aparece con su monto.",
+      "segundos": 0.9,
+      "captura": "E2E-18.png"
+    },
+    {
+      "id": "E2E-19",
+      "descripcion": "Administración: resumen y listado de reservas con el código de la contratación",
+      "inicio": "2026-11-17T17:30:41",
+      "estado": "aprobado",
+      "detalle": "La reserva aparece en el listado global; el resumen carga.",
+      "segundos": 1.8,
+      "captura": "E2E-19.png"
+    },
+    {
+      "id": "E2E-20",
+      "descripcion": "La organización actualiza el perfil de su organización",
+      "inicio": "2026-11-17T17:30:42",
+      "estado": "aprobado",
+      "detalle": "Cambios guardados y confirmados en pantalla.",
+      "segundos": 1.1,
+      "captura": "E2E-20.png"
+    },
+    {
+      "id": "E2E-17",
+      "descripcion": "Accesibilidad: el formulario de ingreso se recorre con Tab en orden lógico",
+      "inicio": "2026-11-17T17:30:44",
+      "estado": "aprobado",
+      "detalle": "Orden de foco: ['email', 'password', 'submit', 'a']",
+      "segundos": 1.7,
+      "captura": "E2E-17.png"
+    },
+    {
+      "id": "RESP-ingreso-movil",
+      "descripcion": "Diseño responsivo: ingreso en movil (390×844) sin desborde horizontal",
+      "inicio": "2026-11-17T17:30:46",
+      "estado": "aprobado",
+      "detalle": "scrollWidth=390px",
+      "segundos": 1.9,
+      "captura": "RESP-ingreso-movil.png"
+    },
+    {
+      "id": "RESP-catalogo-movil",
+      "descripcion": "Diseño responsivo: catalogo en movil (390×844) sin desborde horizontal",
+      "inicio": "2026-11-17T17:30:49",
+      "estado": "aprobado",
+      "detalle": "scrollWidth=390px",
+      "segundos": 1.5,
+      "captura": "RESP-catalogo-movil.png"
+    },
+    {
+      "id": "RESP-servicio-movil",
+      "descripcion": "Diseño responsivo: servicio en movil (390×844) sin desborde horizontal",
+      "inicio": "2026-11-17T17:30:50",
+      "estado": "aprobado",
+      "detalle": "scrollWidth=390px",
+      "segundos": 1.4,
+      "captura": "RESP-servicio-movil.png"
+    },
+    {
+      "id": "RESP-ingreso-tablet",
+      "descripcion": "Diseño responsivo: ingreso en tablet (768×1024) sin desborde horizontal",
+      "inicio": "2026-11-17T17:30:52",
+      "estado": "aprobado",
+      "detalle": "scrollWidth=768px",
+      "segundos": 1.7,
+      "captura": "RESP-ingreso-tablet.png"
+    },
+    {
+      "id": "RESP-catalogo-tablet",
+      "descripcion": "Diseño responsivo: catalogo en tablet (768×1024) sin desborde horizontal",
+      "inicio": "2026-11-17T17:30:54",
+      "estado": "aprobado",
+      "detalle": "scrollWidth=768px",
+      "segundos": 1.7,
+      "captura": "RESP-catalogo-tablet.png"
+    },
+    {
+      "id": "RESP-servicio-tablet",
+      "descripcion": "Diseño responsivo: servicio en tablet (768×1024) sin desborde horizontal",
+      "inicio": "2026-11-17T17:30:56",
+      "estado": "aprobado",
+      "detalle": "scrollWidth=768px",
+      "segundos": 1.4,
+      "captura": "RESP-servicio-tablet.png"
+    },
+    {
+      "id": "RESP-ingreso-escritorio",
+      "descripcion": "Diseño responsivo: ingreso en escritorio (1440×900) sin desborde horizontal",
+      "inicio": "2026-11-17T17:30:58",
+      "estado": "aprobado",
+      "detalle": "scrollWidth=1440px",
+      "segundos": 1.8,
+      "captura": "RESP-ingreso-escritorio.png"
+    },
+    {
+      "id": "RESP-catalogo-escritorio",
+      "descripcion": "Diseño responsivo: catalogo en escritorio (1440×900) sin desborde horizontal",
+      "inicio": "2026-11-17T17:31:00",
+      "estado": "aprobado",
+      "detalle": "scrollWidth=1440px",
+      "segundos": 1.4,
+      "captura": "RESP-catalogo-escritorio.png"
+    },
+    {
+      "id": "RESP-servicio-escritorio",
+      "descripcion": "Diseño responsivo: servicio en escritorio (1440×900) sin desborde horizontal",
+      "inicio": "2026-11-17T17:31:02",
+      "estado": "aprobado",
+      "detalle": "scrollWidth=1440px",
+      "segundos": 1.4,
+      "captura": "RESP-servicio-escritorio.png"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+sequenceDiagram
+  autonumber
+  actor O as Organización
+  participant F as Frontend (React)
+  participant A as API PHP
+  participant B as MariaDB
+  actor S as Administración
+  actor P as Profesional
+  O->>F: Elige día y hora
+  F->>A: POST /disponibilidad?accion=retener
+  A->>B: SELECT … FOR UPDATE (bloque) · INSERT retención 10 min
+  O->>F: Acepta condiciones
+  F->>A: POST /reservas (retencionId, bloqueId, modalidad)
+  A->>B: Transacción: valida retención, congela precio y comisión, INSERT reserva + historial, DELETE bloque
+  A-->>F: 201 SOLICITADA (SK-AAAA-NNNN)
+  S->>A: asignar-administrador → aprobar-admin
+  A->>B: UPDATE estado APROBADA_ADMIN + historial
+  P->>A: aceptar-profesional
+  O->>A: pagar (simulado) → CONFIRMADA
+  O-->>P: Chat de coordinación
+  P->>A: marcar-en-curso → marcar-entregada
+  O->>A: conformidad
+  O->>A: POST /evaluaciones (ciega)
+  P->>A: POST /evaluaciones (ciega)
+  A->>B: ambas enviadas → publicada=1

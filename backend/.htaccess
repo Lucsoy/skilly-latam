@@ -1,0 +1,26 @@
+RewriteEngine On
+
+# Conserva Authorization para que PHP pueda validar el token Bearer en Apache.
+RewriteCond %{HTTP:Authorization} .
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+RewriteRule ^api/auth/login/?$ api/auth/login.php [L,QSA]
+RewriteRule ^api/auth/sesion/?$ api/auth/sesion.php [L,QSA]
+RewriteRule ^api/auth/logout/?$ api/auth/logout.php [L,QSA]
+RewriteRule ^api/auth/contrasena/?$ api/auth/contrasena.php [L,QSA]
+RewriteRule ^api/categorias/?$ api/categorias/index.php [L,QSA]
+RewriteRule ^api/servicios/?$ api/servicios/index.php [L,QSA]
+RewriteRule ^api/servicios/([^/]+)/?$ api/servicios/index.php?id=$1 [L,QSA]
+RewriteRule ^api/profesionales/?$ api/profesionales/index.php [L,QSA]
+RewriteRule ^api/profesionales/([^/]+)/?$ api/profesionales/index.php?id=$1 [L,QSA]
+RewriteRule ^api/organizaciones/?$ api/organizaciones/index.php [L,QSA]
+RewriteRule ^api/reservas/?$ api/reservas/index.php [L,QSA]
+RewriteRule ^api/reservas/([^/]+)/?$ api/reservas/index.php?id=$1 [L,QSA]
+RewriteRule ^api/evaluaciones/?$ api/evaluaciones/index.php [L,QSA]
+RewriteRule ^api/favoritos/?$ api/favoritos/index.php [L,QSA]
+RewriteRule ^api/configuracion/?$ api/configuracion/index.php [L,QSA]
+RewriteRule ^api/disponibilidad/?$ api/disponibilidad/index.php [L,QSA]
+RewriteRule ^api/chat/?$ api/chat/index.php [L,QSA]
+RewriteRule ^api/admin/?$ api/admin/index.php [L,QSA]

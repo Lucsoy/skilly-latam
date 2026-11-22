@@ -1,0 +1,5 @@
+Catálogo público (sin filtros)                       SQL=   21  p50=   15.2ms  p95=   20.9ms  conc 155.1 req/s p95=105.7ms err=0%
+Catálogo filtrado (categoría + modalidad + texto)    SQL=   21  p50=      6ms  p95=    7.7ms  conc 341.4 req/s p95=47.5ms err=0%
+Admin: todas las reservas                            SQL=    9  p50=   17.1ms  p95=   21.3ms  conc 143.5 req/s p95=113.5ms err=0%
+Admin: listado de reservas (endpoint reservas)       SQL=    8  p50=    9.6ms  p95=   13.6ms  conc 188 req/s p95=90.4ms err=0%
+Reputación de un profesional                         SQL=    7  p50=    2.3ms  p95=    3.4ms  conc 708.5 req/s p95=25.6ms err=0%

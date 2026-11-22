@@ -1,0 +1,8 @@
+{
+  "_instrucciones": "Completa estos campos antes de generar el informe (python3 docs/generar_informe.py). Los valores entre paréntesis aparecen tal cual en la portada.",
+  "institucion": "(Institución y sede: completar)",
+  "asignatura": "Asignatura y sección: (completar)",
+  "docente": "Docente: (completar)",
+  "integrantes": ["Integrantes: (completar nombre y RUT de cada integrante)"],
+  "lugar_fecha": "Santiago, noviembre de 2026"
+}

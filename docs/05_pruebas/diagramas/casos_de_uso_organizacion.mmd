@@ -1,0 +1,43 @@
+---
+title: Casos de uso — Visitante y Organización
+---
+flowchart LR
+  V["👤 Visitante"]
+  O["👤 Organización"]
+  subgraph SK["Skilly LATAM"]
+    direction TB
+    CU01(["CU-01 Registrar organización"])
+    CU02(["CU-02 Registrar profesional"])
+    CU11(["CU-11 Buscar y filtrar servicios"])
+    CU22(["CU-22 Consultar reputación"])
+    CU03(["CU-03 Iniciar y cerrar sesión"])
+    CU04(["CU-04 Cambiar contraseña"])
+    CU05(["CU-05 Editar perfil de organización"])
+    CU12(["CU-12 Gestionar favoritos"])
+    CU13(["CU-13 Agendar y solicitar contratación"])
+    CU16(["CU-16 Pagar (simulado)"])
+    CU17(["CU-17 Coordinar por chat"])
+    CU18(["CU-18 Reagendar"])
+    CU19(["CU-19 Cancelar"])
+    CU20(["CU-20 Ejecutar, entregar y dar conformidad"])
+    CU21(["CU-21 Evaluar contraparte"])
+  end
+  V --- CU01
+  V --- CU02
+  V --- CU11
+  V --- CU22
+  O --- CU03
+  O --- CU04
+  O --- CU05
+  O --- CU11
+  O --- CU12
+  O --- CU13
+  O --- CU16
+  O --- CU17
+  O --- CU18
+  O --- CU19
+  O --- CU20
+  O --- CU21
+  O --- CU22
+  CU13 -. "precede" .-> CU16
+  CU19 -. "sin cobro si aún no pagó" .-> CU16

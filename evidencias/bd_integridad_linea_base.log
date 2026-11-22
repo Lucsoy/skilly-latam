@@ -1,0 +1,19 @@
+CP-BD-05 CHECK nivel de evaluación fuera de 1..4 → error 4025 esperado
+--------------
+UPDATE evaluaciones SET calidad = 5 WHERE id = 'perf-ev-1-1'
+--------------
+
+ERROR 4025 (23000) at line 11: CONSTRAINT `evaluaciones.calidad` failed for `skilly_orig`.`evaluaciones`
+CP-BD-06 CHECK bloque con fin anterior al inicio → error 4025 esperado
+CP-BD-07 CHECK total distinto de precio + comisión → error 4025 esperado
+CP-BD-08 UNIQUE una evaluación por parte y reserva → error 1062 esperado
+CP-BD-09 FK RESTRICT: borrar servicio con contrataciones → error 1451 esperado
+CP-BD-10 FK RESTRICT: borrar profesional con contrataciones → error 1451 esperado
+CP-BD-11 FK favoritos → organización inexistente → error 1452 esperado
+--------------
+INSERT INTO favoritos (usuario_id, servicio_id) VALUES ('org-que-no-existe', 'perf-srv-1-1')
+--------------
+
+ERROR 1452 (23000) at line 24: Cannot add or update a child row: a foreign key constraint fails (`skilly_orig`.`favoritos`, CONSTRAINT `favoritos_ibfk_1` FOREIGN KEY (`servicio_id`) REFERENCES `servicios` (`id`) ON DELETE CASCADE)
+CP-BD-12 UNIQUE RUT normalizado: mismo RUT con puntos → error 1062 esperado
+Fin: transacción revertida, la base queda igual

@@ -1,0 +1,22 @@
+stateDiagram-v2
+  direction LR
+  [*] --> SOLICITADA: Organización envía solicitud<br/>(acepta condiciones)
+  SOLICITADA --> APROBADA_ADMIN: Administración asignada aprueba
+  SOLICITADA --> RECHAZADA: Administración rechaza
+  APROBADA_ADMIN --> PENDIENTE_PAGO: Profesional acepta
+  APROBADA_ADMIN --> RECHAZADA: Profesional rechaza
+  PENDIENTE_PAGO --> CONFIRMADA: Pago SIMULADO
+  CONFIRMADA --> REAGENDADA: Organización propone fecha
+  REAGENDADA --> CONFIRMADA: Profesional acepta o rechaza
+  CONFIRMADA --> EN_CURSO: Profesional inicia
+  EN_CURSO --> ENTREGADA: Profesional entrega
+  ENTREGADA --> ENTREGADA: Organización da conformidad
+  ENTREGADA --> EVALUADA: Organización evalúa
+  SOLICITADA --> CANCELADA: Organización cancela
+  APROBADA_ADMIN --> CANCELADA
+  PENDIENTE_PAGO --> CANCELADA
+  CONFIRMADA --> CANCELADA: según política de retención
+  REAGENDADA --> CANCELADA
+  EVALUADA --> [*]
+  RECHAZADA --> [*]
+  CANCELADA --> [*]

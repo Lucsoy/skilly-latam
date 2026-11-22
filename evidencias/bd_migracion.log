@@ -1,0 +1,17 @@
+== CP-BD-01 importación doble de skilly.sql
+tablas	29
+fk	36
+check	19
+== CP-BD-02 scripts separados
+Diferencias: 0
+== CP-BD-04 scripts destructivos
+tablas restantes	0
+== CP-BD-03 migración sobre base antigua con datos
+antes:
+reservas	historial	evaluaciones	servicios	cuentas
+300	900	300	120	41
+migración ejecutada 2 veces sin errores
+después:
+reservas	historial	evaluaciones	servicios	cuentas
+300	900	300	120	41
+Diferencias: 0

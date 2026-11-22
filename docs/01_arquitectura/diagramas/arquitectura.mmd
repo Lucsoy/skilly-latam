@@ -1,0 +1,24 @@
+flowchart LR
+  subgraph Navegador["Navegador (SPA)"]
+    UI["React 18 + TypeScript\nVite · Tailwind\nReact Router · Zustand\nReact Hook Form + Zod"]
+    SVC["src/services/*\n(capa de datos)"]
+    CLI["src/lib/apiClient.ts\nBearer token · errores tipados"]
+    MOCK["src/mocks/*\nmodo demostración\n(VITE_USE_API=false)"]
+    UI --> SVC
+    SVC -->|USE_API=true| CLI
+    SVC -.->|USE_API=false| MOCK
+  end
+  subgraph XAMPP["Servidor XAMPP (Windows)"]
+    VITE["Vite dev :5173\nproxy /api"]
+    AP["Apache + mod_rewrite\nbackend/.htaccess"]
+    subgraph PHP["API REST PHP 8 (htdocs/skilly-api)"]
+      EP["api/{recurso}/index.php\nauth · servicios · reservas · …"]
+      CFG["config/\ncors.php (CORS + cabeceras)\nhelpers.php (auth, lotes, validación)\ndatabase.php (PDO)"]
+      UP[("uploads/documentos\nRequire all denied")]
+    end
+    DB[("MySQL / MariaDB\nskilly_db · 29 tablas")]
+  end
+  CLI -->|HTTP JSON /api/...| VITE --> AP --> EP
+  EP --> CFG
+  CFG -->|PDO, consultas preparadas| DB
+  EP -->|finfo + nombre aleatorio| UP

@@ -1,0 +1,17 @@
+IMPORT_x2_OK
+tablas	30
+fk	36
+check	20
+indices	86
+columnas	207
+Evaluación de desempeño
+SCRIPTS_00_05_IGUAL_A_SKILLY_SQL
+MIGRACION_REEJECUTABLE_SIN_CAMBIOS
+Migración 2026.11-E3.1 aplicada	30	1
+MIGRACION_SOBRE_BASE_E3_OK
+contador 2026=7
+estado_pago=sin_cobro
+historial=1
+BASE_MIGRADA_IGUAL_A_NUEVA
+BORRADO_DE_CONTRATACION_RECHAZADO_POR_LA_BASE (ERROR 1451)
+tablas tras 91: 0
