@@ -73,7 +73,7 @@ export function PaginaBuscar() {
 
   return (
     <div className="catalogo-vitrina flex flex-col gap-6">
-      <header className="flex flex-col gap-4">
+      <header className="flex min-w-0 flex-col gap-4">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">¿Con qué necesitas ayuda?</h1>
           <p className="mt-1.5 text-sm text-tinta-suave">
@@ -128,12 +128,12 @@ export function PaginaBuscar() {
         )}
       </header>
 
-      <div className="grid gap-6 lg:grid-cols-[260px_1fr]">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[260px_minmax(0,1fr)]">
         <aside className="hidden lg:block">
           <div className="sticky top-24 rounded-2xl border border-borde bg-superficie p-5">{panelFiltros}</div>
         </aside>
 
-        <div className="flex flex-col gap-4">
+        <div className="flex min-w-0 flex-col gap-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-2">
               <Boton
@@ -158,7 +158,7 @@ export function PaginaBuscar() {
               </p>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex max-w-full flex-wrap items-center gap-2">
               <label htmlFor="orden" className="text-sm text-tinta-suave">
                 Ordenar por
               </label>
@@ -166,7 +166,7 @@ export function PaginaBuscar() {
                 id="orden"
                 value={filtros.orden}
                 onChange={(e) => aplicar({ ...filtros, orden: e.target.value as FiltrosUi['orden'] })}
-                className="min-h-[36px] rounded-xl border border-borde-fuerte bg-superficie px-3 py-1.5 text-sm focus:border-primario-500"
+                className="min-h-[36px] min-w-0 max-w-full rounded-xl border border-borde-fuerte bg-superficie px-3 py-1.5 text-sm focus:border-primario-500"
               >
                 {OPCIONES_ORDEN.map((o) => (
                   <option key={o.valor} value={o.valor}>
@@ -221,7 +221,7 @@ function Resultados({ cargando, error, recargar, items, hayBusqueda, onLimpiar }
 
   if (cargando) {
     return (
-      <ul aria-busy="true" className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+      <ul aria-busy="true" className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {Array.from({ length: 6 }).map((_, i) => (
           <li key={i}>
             <EsqueletoTarjetaServicio />
@@ -255,7 +255,7 @@ function Resultados({ cargando, error, recargar, items, hayBusqueda, onLimpiar }
 
   return (
     <>
-      <ul className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+      <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {items.map((item, i) => (
           <li key={item.servicio.id}>
             {/* Cascada por columnas: cada fila entra escalonada, no de golpe. */}
