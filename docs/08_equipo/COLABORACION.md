@@ -1,6 +1,6 @@
 # Trabajo colaborativo — Skilly LATAM
 
-> **Cómo trabajamos y cómo se acredita.** Hasta la Evaluación 2 el código se compartió como carpetas comprimidas, sin un repositorio común; por eso esas etapas no tienen historial de commits. Desde esta entrega el proyecto vive en el repositorio GitHub del anexo B, con una rama por tarea, *pull requests* revisados e integración continua.
+> **Cómo trabajamos y cómo se acredita.** Hasta la Evaluación 2 el código se compartió como carpetas comprimidas, sin un repositorio común; por eso esas etapas no tienen historial de commits. Desde esta entrega el proyecto vive en el repositorio GitHub del anexo B, con el código publicado en `main`. La incorporación de revisiones mediante *pull requests* comienza con la propuesta de actualización de este documento.
 >
 > Este documento muestra la integración visible en el código (§1), la organización del equipo (§2-§6) y las evidencias del repositorio (§7). La matriz de roles y el registro de contribuciones están en `Matriz_Responsabilidades_y_Contribuciones.xlsx`.
 
@@ -15,7 +15,15 @@
 | Doble modo de datos (API / demo) | `src/services/*` con `USE_API` | Permite avanzar el frontend sin depender del backend; también ocultó defectos de integración (ver §6) |
 | Documentación previa | `README.md`, `SETUP_XAMPP.md`, `MODULOS_*.md` | Hábito de documentar funcionalidades |
 
-## 2. Roles y responsabilidades (propuesta)
+## 2. Aportes del equipo y roles propuestos
+
+Según el registro del equipo, el proyecto se trabajó en clases y se coordinó por WhatsApp.
+
+- **Alonso Rodríguez** aportó ideas al inicio y desarrolló la base de datos.
+- **David Muñoz** desarrolló la primera versión de la página, probó su funcionamiento y revisó los informes, el código y la presentación visual.
+- **Enzo Cortez** lideró el desarrollo de la versión final, revisó los requerimientos y elaboró el plan de desarrollo.
+
+### Roles propuestos para la matriz RACI
 
 | Rol | Responsabilidades principales |
 |---|---|
@@ -42,14 +50,14 @@ Una propuesta derivada de las incidencias reales:
 | Entorno, Git y CI | Guía de instalación, repositorio, `ci.yml` | Líder técnico |
 | Informe, video y defensa | — | Documentación + todo el equipo |
 
-## 4. Integración de componentes y revisión de código
+## 4. Prácticas propuestas para integrar y revisar cambios
 
 1. **Integración continua** (`.github/workflows/ci.yml`): en cada PR se ejecutan tipos, pruebas unitarias, compilación, sintaxis PHP e integración contra MariaDB.
 2. **Plantilla de PR** (`.github/pull_request_template.md`): qué cambia, cómo se probó, migración si toca la base, sin secretos y revisor asignado.
 3. **Regla "no solo backend":** una acción de la API llega con su botón y su prueba E2E, o con una *issue* enlazada.
 4. **Revisión cruzada:** quien escribe el backend revisa el PR de frontend del mismo flujo, y viceversa. Así se detectan contratos rotos entre capas.
 
-## 5. Uso colaborativo de Git, incidencias y documentación compartida
+## 5. Flujo propuesto de Git y documentación compartida
 
 - **Git:** GitHub Flow con ramas `feature/`, `fix/`, `docs/` y `test/`, `main` protegida y *squash merge*. Detalle en `docs/03_entorno/GUIA_GIT_GITHUB.md`.
 - **Incidencias:** una *issue* por INC-xx y PM-xx, con etiqueta y responsable. El PR que la resuelve la cierra con `Closes #n`.
@@ -69,11 +77,15 @@ Una propuesta derivada de las incidencias reales:
 
 | Evidencia | Formato | Estado |
 |---|---|---|
-| Integrantes y rol de cada uno | Hoja *Roles* | Pendiente |
-| URL del repositorio y acceso del docente | Enlace | Pendiente |
-| Commits y PR por integrante (*Insights → Contributors*, `git shortlog -sn`) | Capturas G-05/G-06 | Pendiente |
-| Registro de contribuciones con evidencia | Hoja *Registro contribuciones* | Pendiente |
+| Integrantes y aportes | Sección 2 y hoja *Roles* | Informados por el equipo |
+| Repositorio público | [Lucsoy/skilly-latam](https://github.com/Lucsoy/skilly-latam) | Código disponible en `main` |
+| Historial y revisión | [Commits](https://github.com/Lucsoy/skilly-latam/commits/main/) y [pull requests](https://github.com/Lucsoy/skilly-latam/pulls) | Historial de publicación y revisión de cambios en GitHub |
+| Registro de contribuciones | Hoja *Registro contribuciones* | Aportes informados por el equipo. Respaldos individuales pendientes |
 | Actas de reuniones o retrospectiva | Hoja *Reuniones* | Pendiente |
 | Tablero de *issues* | Captura G-07 | Pendiente |
 
 El criterio 3.1.3.6 se evalúa además por el **proceso en clases** (responsabilidad, compromiso), que solo el docente puede observar.
+
+## 8. Revisión de este cambio
+
+David puede contrastar los aportes de pruebas y control de calidad. Alonso puede revisar la descripción de la base de datos y del trabajo inicial. Cada integrante puede dejar su observación desde su cuenta en el pull request. El historial de GitHub permite consultar quién revisó el cambio y cuándo.
