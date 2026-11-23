@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { reiniciarAlmacen } from '@/mocks/almacen';
-import { cerrarSesion, iniciarSesion, registrarProfesional } from './auth';
+import { cerrarSesion, iniciarSesion, registrarProfesional, restaurarSesion } from './auth';
 import { obtenerMiCuenta } from './panelProfesional';
 import { actorActual } from './sesionActual';
 import { buscarServicios } from './catalogo';
@@ -9,6 +9,13 @@ describe('cuentas de profesionales', () => {
   beforeEach(async () => {
     reiniciarAlmacen();
     await cerrarSesion();
+  });
+
+  it('restaura la cuenta de demostración con su token después de recargar', async () => {
+    const sesion = await iniciarSesion({ email: 'contacto@bloom.cl', contrasena: 'skilly2026' });
+    await cerrarSesion();
+    expect(await restaurarSesion('mock-token-desconocido')).toBeNull();
+    expect((await restaurarSesion(sesion.token))?.usuario.id).toBe(sesion.usuario.id);
   });
 
   it('registra la etapa 1 con consentimiento versionado y perfil incompleto', async () => {

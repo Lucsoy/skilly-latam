@@ -1,0 +1,100 @@
+# Integración continua de Skilly LATAM.
+# Se ejecuta en cada push y pull request: si algo falla, GitHub marca el PR en rojo
+# antes de que llegue a main (detección temprana de errores, plan de mejora PM-PRU-02).
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  frontend:
+    name: Tipos, pruebas unitarias y compilación
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+
+  api:
+    name: PHP + MariaDB (integración)
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: "yes"
+        ports: ["3306:3306"]
+        options: --health-cmd="healthcheck.sh --connect --innodb_initialized" --health-interval=5s --health-retries=20
+    env:
+      SKILLY_DB_HOST: 127.0.0.1
+      SKILLY_API_URL: http://127.0.0.1:8080/api
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          extensions: pdo_mysql, fileinfo, mbstring
+      - name: Sintaxis PHP
+        run: find backend -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Reglas de agenda y condiciones
+        run: |
+          php tests/cierre/agenda.php
+          php tests/cierre/condiciones.php
+      - name: Importar esquema
+        run: mysql -h 127.0.0.1 -u root < database/skilly.sql
+      - name: Levantar API
+        run: |
+          cd backend
+          php -S 127.0.0.1:8080 ../tests/integracion/router.php > /tmp/php.log 2>&1 &
+          sleep 2
+          curl -fsS http://127.0.0.1:8080/api/categorias/ > /dev/null
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run test:integracion
+      - name: Log de PHP si falla
+        if: failure()
+        run: cat /tmp/php.log
+
+  usabilidad:
+    name: Demostración en ${{ matrix.navegador }}
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        navegador: [chromium, firefox]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install playwright==1.56.0
+      - run: python -m playwright install --with-deps ${{ matrix.navegador }}
+      - name: Probar catálogo, menú, reagendamiento y chat
+        env:
+          VITE_USE_API: 'false'
+          SKILLY_BROWSER: ${{ matrix.navegador }}
+        run: |
+          npm run dev -- --host 127.0.0.1 --port 4197 --strictPort > /tmp/skilly-vite.log 2>&1 &
+          for i in {1..30}; do curl -fsS http://127.0.0.1:4197/ >/dev/null && break; sleep 1; done
+          python tests/e2e/usabilidad_demo.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: usabilidad-${{ matrix.navegador }}
+          path: evidencias-demo

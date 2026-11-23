@@ -237,17 +237,17 @@ export async function cerrarSesion(): Promise<void> {
 }
 
 /** Restaura la sesión guardada en el cliente (equivale a validar el token contra el backend). */
-export async function restaurarSesion(cuentaId: string): Promise<Sesion | null> {
+export async function restaurarSesion(token: string): Promise<Sesion | null> {
   if (USE_API) {
     try {
       // El argumento es el token persistido por el store, no un identificador de cuenta.
-      setApiToken(cuentaId);
+      setApiToken(token);
       const sesion = await api.get<Sesion>('/auth/sesion/');
       establecerSesion(sesion);
       return sesion;
     } catch { establecerSesion(null); return null; }
   }
-  const cuenta = almacen.cuentas.find((c) => c.id === cuentaId);
+  const cuenta = almacen.cuentas.find((c) => `mock-token-${c.id}` === token);
   if (!cuenta) return null;
   try {
     return crearSesion(cuenta);

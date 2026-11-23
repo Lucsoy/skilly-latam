@@ -154,6 +154,13 @@ export function PaginaDetalleReserva() {
           <div>
             <dt className="text-tinta-tenue">Horario</dt>
             <dd className="mt-1 font-medium">{formatearRangoBloque(r.inicio, r.fin)}</dd>
+            {puedeReagendar && (
+              <dd className="mt-2">
+                <Boton variante="secundario" tamano="sm" icono={<CalendarClock className="h-4 w-4" />} onClick={() => void abrirReagendar()}>
+                  Cambiar fecha
+                </Boton>
+              </dd>
+            )}
           </div>
           <div>
             <dt className="text-tinta-tenue">Total</dt>
@@ -208,18 +215,11 @@ export function PaginaDetalleReserva() {
           </BotonEnlace>
         )}
 
-        {(puedeCancelar || puedeReagendar) && (
+        {puedeCancelar && (
           <div className="flex flex-col gap-2 border-t border-borde pt-4 sm:flex-row">
-            {puedeReagendar && (
-              <Boton variante="secundario" tamano="sm" icono={<CalendarClock className="h-4 w-4" />} onClick={() => void abrirReagendar()}>
-                Cambiar fecha
-              </Boton>
-            )}
-            {puedeCancelar && (
-              <Boton variante="peligro" tamano="sm" icono={<XCircle className="h-4 w-4" />} onClick={() => void abrirCancelar()}>
-                Cancelar contratación
-              </Boton>
-            )}
+            <Boton variante="peligro" tamano="sm" icono={<XCircle className="h-4 w-4" />} onClick={() => void abrirCancelar()}>
+              Cancelar contratación
+            </Boton>
           </div>
         )}
 
