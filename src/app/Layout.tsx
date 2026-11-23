@@ -89,14 +89,14 @@ export function Layout() {
           {usuario ? (
             <>
               {/* Con muchos enlaces (cuenta fundadora) el menú se desplaza dentro de la barra en vez de desbordar la página. */}
-              <nav aria-label="Principal" className="site-header__nav hidden min-w-0 items-center gap-1 overflow-x-auto md:flex">
+              <nav aria-label="Principal" className="site-header__nav hidden min-w-0 items-center gap-1 overflow-x-auto xl:flex">
                 {enlaces.map((e) => (
                   <NavLink key={e.a} to={e.a} end={e.exacto} className={({ isActive }) => claseEnlace(isActive)}>
                     {e.texto}
                   </NavLink>
                 ))}
               </nav>
-              <div className="site-header__account hidden shrink-0 items-center gap-3 md:flex">
+              <div className="site-header__account hidden shrink-0 items-center gap-3 xl:flex">
                 <Link
                   to={esAdmin ? '/admin/cuenta' : '/perfil'}
                   className="max-w-[160px] truncate text-sm text-white/80 underline-offset-2 hover:text-white hover:underline"
@@ -110,7 +110,7 @@ export function Layout() {
               </div>
               <button
                 type="button"
-                className="site-header__menu-button inline-flex h-11 w-11 items-center justify-center rounded-lg text-white hover:bg-white/10 md:hidden"
+                className="site-header__menu-button inline-flex h-11 w-11 items-center justify-center rounded-lg text-white hover:bg-white/10 xl:hidden"
                 aria-expanded={menuAbierto}
                 aria-controls="menu-movil"
                 aria-label={menuAbierto ? 'Cerrar menú' : 'Abrir menú'}
@@ -137,7 +137,7 @@ export function Layout() {
         </div>
 
         {usuario && menuAbierto && (
-          <nav id="menu-movil" aria-label="Principal" className="border-t border-white/10 bg-tinta px-4 py-3 md:hidden">
+          <nav id="menu-movil" aria-label="Principal" className="border-t border-white/10 bg-tinta px-4 py-3 xl:hidden">
             <ul className="flex flex-col gap-1">
               {enlaces.map((e) => (
                 <li key={e.a}>
