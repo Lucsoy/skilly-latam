@@ -21,7 +21,13 @@ const CLAVE = 'skilly.chat.v1';
 function cargar(): MensajeChat[] {
   try { return JSON.parse(localStorage.getItem(CLAVE) ?? '[]') as MensajeChat[]; } catch { return []; }
 }
-function guardar(lista: MensajeChat[]) { try { localStorage.setItem(CLAVE, JSON.stringify(lista)); } catch {} }
+function guardar(lista: MensajeChat[]) {
+  try {
+    localStorage.setItem(CLAVE, JSON.stringify(lista));
+  } catch {
+    throw new ErrorServicio('red', 'No se pudo guardar el mensaje en este navegador. Revisa el espacio disponible y vuelve a intentarlo.');
+  }
+}
 
 function reservaAutorizada(id: string): Reserva {
   const r = almacen.reservas.find(x => x.id === id);
